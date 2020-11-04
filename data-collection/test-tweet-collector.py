@@ -3,8 +3,27 @@
 
 import twint # import Twitter scraper
 
+# isUserValid
+# userID (string): the Twitter ID of the user
+# Determination will basically be:
+# User must have at least 5 political tweets
 def isUserValid(userID):
     print("try to see if user is valid")
+
+    return True
+
+
+# getTweetAnalysis(tweetText)
+# tweetText (string): the text of the tweet
+# returns: dictionary of "topic" (string) and "sentiment" (integer)
+# if tweet is not political "topic" = None
+def getTweetAnalysis(tweetText):
+    tweetDict = {
+        "topic": "universal healthcare",
+        "sentiment": 0
+    }
+
+    return tweetDict
 
 
 ## Function finds users
