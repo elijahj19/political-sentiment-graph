@@ -3,7 +3,10 @@
 
 import twint # import Twitter scraper
 
-## Elijah Jasso 2020
+def isUserValid(userID):
+    print("try to see if user is valid")
+
+
 ## Function finds users
 def getUsers(frontiers = 2, usersPerFrontier = 10, minFollowers = 10, maxFollowers = 450, minFollowing = 10, maxFollowing = 1000, initialTweets = 100):
     print("getData called")
