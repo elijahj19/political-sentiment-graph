@@ -18,6 +18,7 @@ def isUserValid(userID):
 # returns: dictionary of "topic" (string) and "sentiment" (integer)
 # if tweet is not political "topic" = None
 def getTweetAnalysis(tweetText):
+    # currently this is the only thing this will output until I test some machine learning stuff
     tweetDict = {
         "topic": "universal healthcare",
         "sentiment": 0
@@ -33,7 +34,7 @@ def getUsers(frontiers = 2, usersPerFrontier = 10, minFollowers = 10, maxFollowe
     c.Limit = 100 # Twint only gets Tweets in the size of 100
     c.Count = True
     c.Search = "vote" # contains this keyword
-    c.Since = "2020-11-03" # only output tweets from this date
+    c.Since = "2020-11-03" # only output tweets since this date
     c.Verified = False # users should not be verified (blue check mark)
     c.Hide_output = True # don't print output to console here (maybe do it elsewhere)
     c.Debug = True
