@@ -1,0 +1,1 @@
+This folder contains the code for testing different sentiment analysis and topic detection methods
