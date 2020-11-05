@@ -1,0 +1,1 @@
+This folder contains the code that takes the graph data and performs an analysis on them
