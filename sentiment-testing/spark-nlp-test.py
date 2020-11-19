@@ -4,6 +4,8 @@ from sparknlp.pretrained import PretrainedPipeline
 import sparknlp
 
 spark = sparknlp.start(gpu=True)
+sparknlp.version()
+spark.version
 
 # Download a pre-trained pipeline
 pipeline = PretrainedPipeline('explain_document_dl', lang='en')
