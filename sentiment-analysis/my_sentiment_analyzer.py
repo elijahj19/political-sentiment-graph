@@ -1,5 +1,7 @@
 # This is the black box sentiment analyzer which will be used by the data processor and uses some other sentiment analysis method
 
+import preprocessor as p
+p.set_options(p.OPT.URL, p.OPT.EMOJI, p.OPT.MENTION) # filter out urls, emojis and mentions (@'s)
 
 # getSentiment(text: string, idea: string)
 # This function accepts some text, and an idea/entity for which the function should extract the sentiment about

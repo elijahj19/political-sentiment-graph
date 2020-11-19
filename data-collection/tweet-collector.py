@@ -78,6 +78,7 @@ def getInitialUser(topic, sentiment, minTweets = 2):
     c = twint.Config()
     c.Limit = 100 # Twint only gets Tweets in the size of 100
     c.Count = True
+    c.Retweets = False
     c.Search = topic # contains this keyword of topic
     c.Since = "2020-11-03" # only output tweets since this date
     c.Verified = False # users should not be verified (blue check mark)
@@ -87,7 +88,8 @@ def getInitialUser(topic, sentiment, minTweets = 2):
     tweetList = twint.output.tweets_list
 
     for tweet in tweetList:
-        print(tweet)
+        print(f"{tweet.datestamp}: User {tweet.username} said '{tweet.tweet}'")
+        userID = tweet.user_id
 
     return None
 
