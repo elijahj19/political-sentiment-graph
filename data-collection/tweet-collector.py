@@ -1,7 +1,23 @@
 ## Elijah Jasso 2020
 ## This python code collects and stores tweets
 
+# import sentiment analyzer black box 
+import sys
+sys.path.insert(0, 'D:/School/CollegeJunior/Fall2020/LING495/Project/repo/political-sentiment-graph/sentiment-analysis')
+import my_sentiment_analyzer as msa
+
 import twint # import Twitter scraper
+
+
+# isUserValid
+# userID (string): the Twitter ID of the user
+# topic (string): the political topic/person to see if the user is political about
+# mention_threshold (integer): the minimum number of tweets that are related to the topic
+# returns boolean
+# DESCRIPTION this function takes in a userID, topic, and threshold to see if the user is poltical
+# returns True is user has tweet_threshold tweets about the topic, False otherwise
+def isUserPoliticalAbout(userID, topic, tweet_threshold = 5):
+    print(f'Determining whether user {userID} is has at least {tweet_threshold} tweets about {topic}')
 
 
 ## Function finds users
@@ -29,8 +45,5 @@ def getUsers(frontiers = 2, usersPerFrontier = 10, minFollowers = 10, maxFollowe
 # main function that runs when python code is run
 if __name__ == "__main__":
     print("main called")
-    # users = getUsers(2, 10)
-    # print(len(users))
-    # for i in range(10):
-    #     print(users[i].username + ": " + users[i].tweet + " --- AT " + users[i].timestamp + " " + users[i].datestamp)
+    
 
