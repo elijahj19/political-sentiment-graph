@@ -1,1 +1,5 @@
 # political-sentiment-graph
+## Preface
+Twitter is a popular social network which allows users to send out short (280 character) messages--tweets--posted to their profiles or in response to other messages. Users can "follow" other users to receive these tweets, or alternatively can search for tweets which match certain topics or keywords. Since its inception, Twitter has seen a rise in political activity on its platform. The most popular of this activity comes from political figureheads or otherwise famous people. However, many nonfamous users also use Twitter to voice their political opinions. 
+## Goal
+In this project I intend to examine the network that is formed by **non-famous** politically-vocal users and their non-famous politically-vocal followers. I am using sentiment analysis to determine political opinion about select relevant politicians and policies.
