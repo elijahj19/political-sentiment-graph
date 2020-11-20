@@ -64,16 +64,10 @@ def getFollowing(username):
 
     return following
 
-# getUserSentiment
-# username (string): the Twitter username of the user
-# topic (string): the political topic/person to see if the user is political about
-# DESCRIPTION: this function takes in a username and topic to calculate the User's sentiment towards the topic
-# returns (average sentiment towards topic, total tweets about topic)
-def getUserSentiment(username, topic):
-    print(f"Determining user {username}'s sentiment towards {topic}")
+def getUserTweetsAboutTopic(username, topic, limit = 100):
     tweetList = []
     c = twint.Config()
-    c.Limit = 100 # Twint only gets Tweets in the size of 100
+    c.Limit = limit
     c.Username = str(username)
     c.Count = True
     c.Retweets = False
@@ -82,6 +76,18 @@ def getUserSentiment(username, topic):
     c.Store_object_tweets_list = tweetList
     c.Hide_output = True
     twint.run.Search(c)
+    
+    return tweetList
+
+
+# getUserSentiment
+# username (string): the Twitter username of the user
+# topic (string): the political topic/person to see if the user is political about
+# DESCRIPTION: this function takes in a username and topic to calculate the User's sentiment towards the topic
+# returns (average sentiment towards topic, total tweets about topic)
+def getUserSentiment(username, topic):
+    print(f"Determining user {username}'s sentiment towards {topic}")
+    tweetList = getUserTweetsAboutTopic(username, topic, 100)
 
     avgSentiment = 0
     totalTweets = 0
