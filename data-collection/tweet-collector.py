@@ -98,6 +98,8 @@ def getUserSentiment(username, topic):
     print(f"{username} has {avgSentiment} sentiment towards {topic} over {totalTweets} tweets")
     return (avgSentiment, totalTweets)
 
+
+# filter the usernames in a following/followers list such that it only incldues those who are nonfamous and have sentiment about topic
 def filterFollowList(followList, topic, minTweets = 2):
     filteredList = []
     for user in followList:
@@ -111,6 +113,7 @@ def filterFollowList(followList, topic, minTweets = 2):
 
 # getUsers
 # frontiers (integer): how many BFS frontiers from starting user to get
+
 def getUserMap(rootUsername, topic, frontiers):
     """
     userMap
@@ -131,7 +134,7 @@ def getUserMap(rootUsername, topic, frontiers):
     }
     """
     userMap = {}
-    
+    # TODO
 
     return userMap
 
@@ -192,8 +195,3 @@ def createSingleTopicNetwork(topic, initialUserSentiment, frontiers = 1, minTwee
 if __name__ == "__main__":
     print("main called")
     positiveTrumpNetwork = createSingleTopicNetwork("trump", 1, 2)
-    #print(getFollowers(1010236118))
-    # negativeTrumpNetwork = createSingleTopicNetwork("trump", -1, 1, 2)
-
-    # positiveBidenNetwork = createSingleTopicNetwork("biden", 1, 1, 2)
-    # negativeBidenNetwork = createSingleTopicNetwork("biden", -1, 1, 2)
