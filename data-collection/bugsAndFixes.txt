@@ -1,0 +1,3 @@
+-Twint follower error: [FIX] in feed.py of Twint installation, remove the "[0]" from the function Follow.
+
+-Twint currently only retrieves a small portion of followers

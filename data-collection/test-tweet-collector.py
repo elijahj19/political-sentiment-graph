@@ -40,6 +40,7 @@ def getUsers(frontiers = 2, usersPerFrontier = 10, minFollowers = 10, maxFollowe
     c.Debug = True
     c.Store_object = True # store as object
     c.Store_json = True
+    c.User_full = True
     c.Output = "initialUsers.json"
     # c.User_full = True
     data = []
