@@ -1,15 +1,15 @@
 {
   "name": "political-sentiment-network",
   "version": "1.0.0",
-  "description": "TODO\r Create the webapp",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.4"
   }
 }
