@@ -83,16 +83,17 @@ def getUserTweetsAboutTopic(username, topic, limit = 100):
 # getUserSentiment
 # username (string): the Twitter username of the user
 # topic (string): the political topic/person to see if the user is political about
+# maxTweets (integer): maximum number of sentimented tweets to analyze 
 # DESCRIPTION: this function takes in a username and topic to calculate the User's sentiment towards the topic
 # returns (average sentiment towards topic, total tweets about topic)
-def getUserSentiment(username, topic):
+def getUserSentiment(username, topic, maxTweets = 20):
     print(f"Determining user {username}'s sentiment towards {topic}")
     tweetList = getUserTweetsAboutTopic(username, topic, 100)
 
-    avgSentiment = 0
-    totalTweets = 0
+    avgSentiment = 0 # average sentiment over the tweets analyzed for sentiment
+    totalTweets = 0 # total tweets analyzed for sentiment (excludes tweets not analyzed for sentiment)
     for tweet in tweetList:
-        if totalTweets > 20:
+        if totalTweets > 20: # for sake of brevity only analyze a maximum of 20 tweets
             break
         if (str(username) == str(tweet.username) and topic in tweet.tweet.lower()):
             calcSentiment = msa.getSentiment(tweet.tweet, topic)
@@ -117,17 +118,21 @@ def filterFollowList(followList, topic, minTweets = 2):
     return filteredList
 
 
-# getUsers
+# getSingleTopicNetwork
+# rootUsername (string): user's username from which to base the network around
+# topic (string): topic focus of the network (what should the network analyze each users' sentiment about)
 # frontiers (integer): how many BFS frontiers from starting user to get (maximum length of path from rootUsername to any other node)
-def getNetwork(rootUsername, topic, frontiers):
+# RETURN: adjacency list in the form of Python dictionary 
+#   {"username" : {"avgSentiment": -1, "totalTweets": 10, "following": ["username"], "followers": ["username"]}} 
+def getSingleTopicNetwork(rootUsername, topic, frontiers):
     """
-    userMap
+    network
     maps username to data
     {
         "username1": { # username 1
             topicAvgSentiment: 1,
             topicTotalTweets: 10
-            followerIDs: [2, 3, 10],
+            followers: [2, 3, 10],
             followingIDs: [2, 3, 10]
         },
         "username2": {
@@ -138,10 +143,10 @@ def getNetwork(rootUsername, topic, frontiers):
         }
     }
     """
-    userMap = {}
+    network = {}
     # TODO
 
-    return userMap
+    return network
 
 # getRootNodeUser
 # topic (string): political topic user has tweeted about, basis of the network
@@ -188,7 +193,8 @@ def getRootNodeUser(topic, desiredSentiment, minTweets = 2):
 # initialUserSentiment (integer): should the root node user of the network/graph have positive (>0) or negative (<0)
 #  sentiment towards topic
 # frontiers (integer): how many BFS frontiers starting from the root node should there be in the returned network
-# RETURNS adjacency list in the form of Python dictionary {"username" : {"following": ["username"], "followedBy": ["username"]}} 
+# RETURN: adjacency list in the form of Python dictionary 
+#   {"username" : {"avgSentiment": -1, "totalTweets": 10, "following": ["username"], "followers": ["username"]}} 
 def createSingleTopicNetwork(topic, initialUserSentiment, frontiers = 1, minTweets = 2):
     print(f"Creating graph about {topic} with {frontiers} frontiers")
     rootUser = getRootNodeUser(topic, initialUserSentiment, minTweets)
