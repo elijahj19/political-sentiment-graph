@@ -118,9 +118,8 @@ def filterFollowList(followList, topic, minTweets = 2):
 
 
 # getUsers
-# frontiers (integer): how many BFS frontiers from starting user to get
-
-def getUserMap(rootUsername, topic, frontiers):
+# frontiers (integer): how many BFS frontiers from starting user to get (maximum length of path from rootUsername to any other node)
+def getNetwork(rootUsername, topic, frontiers):
     """
     userMap
     maps username to data
@@ -144,8 +143,12 @@ def getUserMap(rootUsername, topic, frontiers):
 
     return userMap
 
-# minTweets helps to minimize error caused by faulty sentiment analysis
-def getInitialUser(topic, desiredSentiment, minTweets = 2):
+# getRootNodeUser
+# topic (string): political topic user has tweeted about, basis of the network
+# desiredSentiment (number): sentiment user should have (on average) towards topic. <0 for negative, >0 for positive
+# minTweets (integer): the minimum number of sentimented tweets the user should have towards a topic, to help further verify
+#   their sentiment towards a topic, combat against sentiment analysis error
+def getRootNodeUser(topic, desiredSentiment, minTweets = 2):
     print(f"Getting root node user for with sentiment of {desiredSentiment} towards {topic}, corraborated by {minTweets} of their tweets")
     tweetList = []
     c = twint.Config()
@@ -184,10 +187,11 @@ def getInitialUser(topic, desiredSentiment, minTweets = 2):
 # topic (string): political topic focus of network
 # initialUserSentiment (integer): should the root node user of the network/graph have positive (>0) or negative (<0)
 #  sentiment towards topic
-# fronters (integer): how many BFS frontiers starting from the root node should there be 
+# frontiers (integer): how many BFS frontiers starting from the root node should there be in the returned network
+# RETURNS adjacency list in the form of Python dictionary {"username" : {"following": ["username"], "followedBy": ["username"]}} 
 def createSingleTopicNetwork(topic, initialUserSentiment, frontiers = 1, minTweets = 2):
     print(f"Creating graph about {topic} with {frontiers} frontiers")
-    rootUser = getInitialUser(topic, initialUserSentiment, minTweets)
+    rootUser = getRootNodeUser(topic, initialUserSentiment, minTweets)
     # if unable to get a root user
     if rootUser == None:
         raise Exception(f"Could not find suitable root user for topic {topic} with {initialUserSentiment} sentiment")
@@ -195,6 +199,10 @@ def createSingleTopicNetwork(topic, initialUserSentiment, frontiers = 1, minTwee
     print(getFollowers(rootUser["username"]))
     print(getFollowing(rootUser["username"]))
     #getUserMap(rootUser["username"], topic, frontiers)
+
+    network = {}
+
+    return network
 
 
 # main function that runs when python code is run
