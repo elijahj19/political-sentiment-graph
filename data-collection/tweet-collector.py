@@ -114,7 +114,7 @@ def filterFollowList(followList, topic, minTweets = 2):
             continue
         avgSentiment, totalTweets = getUserSentiment(user, topic)
         if (avgSentiment != 0) and totalTweets > minTweets:
-            filteredList.append(user)
+            filteredList.append((user, avgSentiment, totalTweets))
     return filteredList
 
 
@@ -124,7 +124,7 @@ def filterFollowList(followList, topic, minTweets = 2):
 # frontiers (integer): how many BFS frontiers from starting user to get (maximum length of path from rootUsername to any other node)
 # RETURN: adjacency list in the form of Python dictionary 
 #   {"username" : {"avgSentiment": -1, "totalTweets": 10, "following": ["username"], "followers": ["username"]}} 
-def getSingleTopicNetwork(rootUsername, topic, frontiers):
+def getSingleTopicNetwork(rootUsername, rootUserAvgSentiment, rootUserTotalTweets, topic, frontiers):
     """
     network
     maps username to data
@@ -143,8 +143,57 @@ def getSingleTopicNetwork(rootUsername, topic, frontiers):
         }
     }
     """
-    network = {}
-    # TODO
+    network = {
+        rootUsername: {
+            "topicAvgSentiment": rootUserAvgSentiment,
+            "topicTotalTweets": rootUserTotalTweets,
+            "followers": [],
+            "following": []
+        }
+    }
+    nonValidUsernames = {} # set of usernames already explored that have been determined to not be valid, saves calls to Twitter
+
+    # perform a modified BFS from rootUsername to create network
+    queue = [(rootUsername, 0)] # a queue for each 
+    while len(queue) > 0:
+        # pop the user from the queue
+        username, curFrontier = queue.pop(0)
+
+        # if the user has been already added as a node to network, must be valid
+        # at this point the user's followers have been edited but not the following
+        if username in network:
+            print("user already present in network")
+            tempFollowing = getFollowing(username) # get all followers
+            
+            for followingUser in tempFollowing:
+                # if the followed user is already in the network, just append the usernames to respective lists
+                if followingUser in network:
+                    network[followingUser]["followers"].append(username)
+                    network[username]["following"].append(followingUser)
+                    continue                    
+                # if followed user is outside the frontiers of the grpah or the followed user is not valid, skip
+                if curFrontier >= frontiers or followingUser in nonValidUsernames or not isUserValid(followingUser):
+                    continue
+                # otherwise must calculate the stats for the followed user and add them to the network
+                avgSentiment, totalTweets = getUserSentiment(followingUser, topic)
+                if (avgSentiment != 0) and totalTweets > 2:
+                    network[followingUser] = {
+                        "topicAvgSentiment": avgSentiment,
+                        "topicTotalTweets": totalTweets,
+                        "following": [], # this will be updated once 
+                        "followers": []
+                    }
+                    network[username]["following"].append(followingUser)
+                    queue.append((followingUser, curFrontier + 1)) # add the new user to the queue with the frontier
+                else:
+                    nonValidUsernames.add(followingUser)        
+        # if the user has not been seen before and is NOT valid
+        else:
+            print(f"user {username} not valid")
+            nonValidUsernames.add(username)
+            continue
+
+        
 
     return network
 
