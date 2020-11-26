@@ -173,7 +173,7 @@ def getSingleTopicNetwork(rootUsername, rootUserAvgSentiment, rootUserTotalTweet
                     network[username]["following"].append(followingUser)
                     continue                    
                 # if followed user is outside the frontiers of the grpah or the followed user is not valid, skip
-                if curFrontier >= frontiers or followingUser in nonValidUsernames or not isUserValid(followingUser):
+                elif curFrontier >= frontiers or followingUser in nonValidUsernames or not isUserValid(followingUser):
                     continue
                 # otherwise must calculate the stats for the followed user and add them to the network
                 avgSentiment, totalTweets = getUserSentiment(followingUser, topic)
@@ -181,7 +181,7 @@ def getSingleTopicNetwork(rootUsername, rootUserAvgSentiment, rootUserTotalTweet
                     network[followingUser] = {
                         "topicAvgSentiment": avgSentiment,
                         "topicTotalTweets": totalTweets,
-                        "following": [], # this will be updated once 
+                        "following": [],
                         "followers": []
                     }
                     network[username]["following"].append(followingUser)
@@ -245,12 +245,12 @@ def getRootNodeUser(topic, desiredSentiment, minTweets = 2):
 # frontiers (integer): how many BFS frontiers starting from the root node should there be in the returned network
 # RETURN: adjacency list in the form of Python dictionary 
 #   {"username" : {"avgSentiment": -1, "totalTweets": 10, "following": ["username"], "followers": ["username"]}} 
-def createSingleTopicNetwork(topic, initialUserSentiment, frontiers = 1, minTweets = 2):
+def createSingleTopicNetwork(topic, rootUserSentiment, frontiers = 1, minTweets = 2):
     print(f"Creating graph about {topic} with {frontiers} frontiers")
-    rootUser = getRootNodeUser(topic, initialUserSentiment, minTweets)
+    rootUser = getRootNodeUser(topic, rootUserSentiment, minTweets)
     # if unable to get a root user
     if rootUser == None:
-        raise Exception(f"Could not find suitable root user for topic {topic} with {initialUserSentiment} sentiment")
+        raise Exception(f"Could not find suitable root user for topic {topic} with {rootUserSentiment} sentiment")
     print(f"root user node is {rootUser}")
     print(getFollowers(rootUser["username"]))
     print(getFollowing(rootUser["username"]))
