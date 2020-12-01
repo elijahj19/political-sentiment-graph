@@ -5,14 +5,15 @@ import datetime
 
 import graph_generator as gg
 
+ABSOLUTE_DATA_FOLDER_PATH = "D:/School/CollegeJunior/Fall2020/LING495/Project/repo/political-sentiment-graph/data-collection/data"
 
 def saveGraph(graph, topic, rootUserSentiment):
     print('saving graph')
     
-    graphJSON = json.dumps(dict)
+    graphJSON = json.dumps(graph)
     currentTime = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S_%f") # 2020_12_31_13_45_30_000321
     sentiment = "positive" if rootUserSentiment > 0 else "negative"
-    f = open(f"data/{topic}_{sentiment}_{currentTime}_Graph.json","w")
+    f = open(f"{ABSOLUTE_DATA_FOLDER_PATH}/{topic}_{sentiment}_{currentTime}_Graph.json", "w")
     f.write(graphJSON)
     f.close()
 
