@@ -5,6 +5,7 @@
 import sys
 sys.path.insert(0, 'D:/School/CollegeJunior/Fall2020/LING495/Project/repo/political-sentiment-graph/sentiment-analysis')
 import my_sentiment_analyzer as msa # this is the sentiment analyzer code from the sentiment-analysis folder
+import twitter_wrapper as tw
 
 import json
 
@@ -22,113 +23,10 @@ MIN_FOLLOWING = 10 # minimum amount of of users a user can follower to qualify
 # returns True if the user's following and followers conforms to the MAX_FOLLOWERS MIN_FOLLOWERS constraints
 # returns False otherwise
 def isUserValid(username):
-    users = []
-    # perform Twitter scrape of user
-    c = twint.Config()
-    c.Username = str(username)
-    c.Hide_output = True
-    c.Store_object = True # store as object
-    c.Store_object_users_list = users
-    twint.run.Lookup(c)
-
-    # perform validation check
-    user = users[0]
-    followers = int(user.followers)
-    following = int(user.following)
-    print(f"{username} is {user.username} has {user.followers} followers and is following {following} users")
+    followers, following = tw.getFollowersAndFollowingNums(username)
+    print(f"{username}  has {followers} followers and is following {following} users")
     isValid = (followers <= MAX_FOLLOWERS and following <= MAX_FOLLOWING and followers >= MIN_FOLLOWERS and following >= MIN_FOLLOWING)
     return isValid
-
-def getFollowers(username):
-    followers = []
-    # perform Twitter scrape for user's followers
-    # c = twint.Config()
-    # c.Username = username
-    # c.Hide_output = True
-    # #c.Limit = MAX_FOLLOWERS
-    # c.Store_object = True
-    # c.Store_object_follow_list = followers
-    # twint.run.Followers(c)
-
-    followersObj = BlueBird().get_followers(username)
-
-    for u in followersObj:
-        followers.append(u)
-
-    return followers
-
-def getFollowing(username):
-    following = []
-    # perform Twitter scrape for user's followers
-    # c = twint.Config()
-    # c.Username = username
-    # c.Hide_output = True
-    # #c.Limit = MAX_FOLLOWING
-    # c.Store_object = True
-    # c.Store_object_follow_list = following
-    # twint.run.Following(c)
-
-    followingObj = BlueBird().get_followings(username)
-
-    for u in followingObj:
-        following.append(u)
-
-    return following
-
-def getUserTweetsAboutTopic(username, topic, limit = 100):
-    tweetList = []
-    c = twint.Config()
-    c.Limit = limit
-    c.Username = str(username)
-    c.Count = True
-    c.Retweets = False
-    c.Search = topic # contains this keyword of topic
-    c.Store_object = True # store as object
-    c.Store_object_tweets_list = tweetList
-    c.Hide_output = True
-    twint.run.Search(c)
-    
-    return tweetList
-
-
-# getUserSentiment
-# username (string): the Twitter username of the user
-# topic (string): the political topic/person to see if the user is political about
-# maxTweets (integer): maximum number of sentimented tweets to analyze 
-# DESCRIPTION: this function takes in a username and topic to calculate the User's sentiment towards the topic
-# returns (average sentiment towards topic, total tweets about topic)
-def getUserSentiment(username, topic, maxTweets = 20):
-    print(f"Determining user {username}'s sentiment towards {topic}")
-    tweetList = getUserTweetsAboutTopic(username, topic, 100)
-
-    avgSentiment = 0 # average sentiment over the tweets analyzed for sentiment
-    totalTweets = 0 # total tweets analyzed for sentiment (excludes tweets not analyzed for sentiment)
-    for tweet in tweetList:
-        if totalTweets > 20: # for sake of brevity only analyze a maximum of 20 tweets
-            break
-        if (str(username) == str(tweet.username) and topic in tweet.tweet.lower()):
-            calcSentiment = msa.getSentiment(tweet.tweet, topic)
-            avgSentiment += calcSentiment
-            totalTweets += 1
-        
-    if totalTweets > 0:
-        avgSentiment = avgSentiment / totalTweets
-    print(f"{username} has {avgSentiment} sentiment towards {topic} over {totalTweets} tweets")
-    return (avgSentiment, totalTweets)
-
-
-# filter the usernames in a following/followers list such that it only incldues those who are nonfamous and have sentiment about topic
-# DEPRECATED for now
-def filterFollowList(followList, topic, minTweets = 2):
-    filteredList = []
-    for user in followList:
-        if not isUserValid(user):
-            continue
-        avgSentiment, totalTweets = getUserSentiment(user, topic)
-        if (avgSentiment != 0) and totalTweets > minTweets:
-            filteredList.append((user, avgSentiment, totalTweets))
-    return filteredList
-
 
 # getSingleTopicNetwork
 # rootUsername (string): user's username from which to base the network around
@@ -175,7 +73,7 @@ def getSingleTopicNetwork(rootUsername, rootUserAvgSentiment, rootUserTotalTweet
         # at this point the user's followers have been edited but not the following
         if username in network:
             print("user already present in network")
-            tempFollowing = getFollowing(username) # get all followers
+            tempFollowing = tw.getFollowing(username) # get all followers
             
             for followingUser in tempFollowing:
                 # if the followed user is already in the network, just append the usernames to respective lists
@@ -187,7 +85,7 @@ def getSingleTopicNetwork(rootUsername, rootUserAvgSentiment, rootUserTotalTweet
                 elif curFrontier >= frontiers or followingUser in nonValidUsernames or not isUserValid(followingUser):
                     continue
                 # otherwise must calculate the stats for the followed user and add them to the network
-                avgSentiment, totalTweets = getUserSentiment(followingUser, topic)
+                avgSentiment, totalTweets = tw.getUserSentiment(followingUser, topic)
                 if (avgSentiment != 0) and totalTweets > 2:
                     network[followingUser] = {
                         "topicAvgSentiment": avgSentiment,
@@ -237,7 +135,7 @@ def getRootNodeUser(topic, desiredSentiment, minTweets = 2):
             if calcSentiment * desiredSentiment < 0 or not isUserValid(tweet.username): # if the calculated sentiment and desired sentiment are of opposite types
                 continue # skip to next tweet
             # otherwise we now check if the user has other tweets confirming their sentiment towards the topic
-            avgSentiment, totalTweets = getUserSentiment(tweet.username, topic)
+            avgSentiment, totalTweets = tw.getUserSentiment(tweet.username, topic)
 
             # if the user's avg sentiment is of the type we want and has at least our minTweets about the topic
             if desiredSentiment * avgSentiment > 0 and totalTweets >= minTweets:
@@ -266,8 +164,8 @@ def createSingleTopicNetwork(topic, rootUserSentiment, frontiers = 1, minTweets 
     if rootUser == None:
         raise Exception(f"Could not find suitable root user for topic {topic} with {rootUserSentiment} sentiment")
     print(f"root user node is {rootUser}")
-    print(getFollowers(rootUser["username"]))
-    print(getFollowing(rootUser["username"]))
+    print(tw.getFollowers(rootUser["username"]))
+    print(tw.getFollowing(rootUser["username"]))
     #getUserMap(rootUser["username"], topic, frontiers)
 
     network = getSingleTopicNetwork(rootUser["username"], rootUser["avgSentiment"], rootUser["totalTweets"], topic, frontiers)
