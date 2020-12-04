@@ -64,44 +64,59 @@ def getSingleTopicNetwork(rootUsername, rootUserAvgSentiment, rootUserTotalTweet
     nonValidUsernames = set() # set of usernames already explored that have been determined to not be valid, saves calls to Twitter
 
     # perform a modified BFS from rootUsername to create network
-    queue = [(rootUsername, 0)] # a queue for each 
-    while len(queue) > 0:
-        # pop the user from the queue
-        username, curFrontier = queue.pop(0)
+    queue = [(rootUsername, 0)] # a queue for each
+    try:
+        while len(queue) > 0:
+            # pop the user from the queue
+            username, curFrontier = queue.pop(0)
 
-        # if the user has been already added as a node to network, must be valid
-        # at this point the user's followers have been edited but not the following
-        if username in network:
-            print("user already present in network")
-            tempFollowing = tw.getFollowing(username) # get all followers
-            
-            for followingUser in tempFollowing:
-                # if the followed user is already in the network, just append the usernames to respective lists
-                if followingUser in network:
-                    network[followingUser]["followers"].append(username)
-                    network[username]["following"].append(followingUser)
-                    continue                    
-                # if followed user is outside the frontiers of the grpah or the followed user is not valid, skip
-                elif curFrontier >= frontiers or followingUser in nonValidUsernames or not isUserValid(followingUser):
+            # if the user has been already added as a node to network, must be valid
+            # at this point the user's followers have been edited but not the following
+            if username in network:
+                print("user already present in network")
+                tempFollowing = tw.getFollowing(username) # get all followers
+                
+                if curFrontier >= frontiers:
                     continue
-                # otherwise must calculate the stats for the followed user and add them to the network
-                avgSentiment, totalTweets = tw.getUserSentiment(followingUser, topic)
-                if (avgSentiment != 0) and totalTweets > 2:
-                    network[followingUser] = {
-                        "topicAvgSentiment": avgSentiment,
-                        "topicTotalTweets": totalTweets,
-                        "following": [],
-                        "followers": []
-                    }
-                    network[username]["following"].append(followingUser)
-                    queue.append((followingUser, curFrontier + 1)) # add the new user to the queue with the frontier
-                else:
-                    nonValidUsernames.add(followingUser)        
-        # if the user has not been seen before and is NOT valid
-        else:
-            print(f"user {username} not valid")
-            nonValidUsernames.add(username)
-            continue
+
+                for followingUser in tempFollowing:
+                    # if the followed user is already in the network, just append the usernames to respective lists
+                    if followingUser in network:
+                        network[followingUser]["followers"].append(username)
+                        network[username]["following"].append(followingUser)
+                        continue                    
+                    # if followed user is outside the frontiers of the graph or the followed user is not valid, skip
+                    elif curFrontier >= frontiers or followingUser in nonValidUsernames:
+                        print(f'skipping followingUser {followingUser}')
+                        continue
+                    elif not isUserValid(followingUser):
+                        print(f'Skipping following user {followingUser} because not valid')
+                        nonValidUsernames.add(followingUser)
+                        continue
+                    print(f'analyzing sentiment of following user {followingUser}')
+                    # otherwise must calculate the stats for the followed user and add them to the network
+                    avgSentiment, totalTweets = tw.getUserSentiment(followingUser, topic)
+                    if (avgSentiment != 0) and totalTweets >= 2:
+                        network[followingUser] = {
+                            "topicAvgSentiment": avgSentiment,
+                            "topicTotalTweets": totalTweets,
+                            "following": [],
+                            "followers": [username]
+                        }
+                        network[username]["following"].append(followingUser)
+                        queue.append((followingUser, curFrontier + 1)) # add the new user to the queue with the frontier
+                        print(f'{followingUser} has been added')
+                    else:
+                        print(f'{followingUser} did not have discernible sentiment')
+                        nonValidUsernames.add(followingUser)        
+            # if the user has not been seen before and is NOT valid
+            else:
+                print(f"user {username} not valid")
+                nonValidUsernames.add(username)
+                continue
+        
+    except:
+        print('Probably a rate limit error, saving graph as is')
 
         
 
@@ -158,8 +173,10 @@ def getRootNodeUser(topic, desiredSentiment, minTweets = 2):
 # RETURN: adjacency list in the form of Python dictionary 
 #   {"username" : {"avgSentiment": -1, "totalTweets": 10, "following": ["username"], "followers": ["username"]}} 
 def createSingleTopicNetwork(topic, rootUserSentiment, frontiers = 1, minTweets = 2):
+    tw.loadCache()
     print(f"Creating graph about {topic} with {frontiers} frontiers")
     rootUser = getRootNodeUser(topic, rootUserSentiment, minTweets)
+    print(f'received root user {rootUser}')
     # if unable to get a root user
     if rootUser == None:
         raise Exception(f"Could not find suitable root user for topic {topic} with {rootUserSentiment} sentiment")
@@ -169,7 +186,7 @@ def createSingleTopicNetwork(topic, rootUserSentiment, frontiers = 1, minTweets 
     #getUserMap(rootUser["username"], topic, frontiers)
 
     network = getSingleTopicNetwork(rootUser["username"], rootUser["avgSentiment"], rootUser["totalTweets"], topic, frontiers)
-
+    tw.saveCache()
     return network
 
 

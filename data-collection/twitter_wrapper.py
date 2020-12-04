@@ -163,6 +163,7 @@ def getUserSentiment(username, topic, maxTweets = 20):
     elif username not in cache or 'topics' not in cache[username] or topic not in cache[username]['topics']:
         getUserTweetsAboutTopic(username, topic)
     
+    print(f'DOING ANALYSIS on {username}')
     tweetList = cache[username]['topics'][topic]['tweets']
     avgSentiment = 0 # average sentiment over the tweets analyzed for sentiment
     totalTweets = 0 # total tweets analyzed for sentiment (excludes tweets not analyzed for sentiment)
@@ -176,6 +177,6 @@ def getUserSentiment(username, topic, maxTweets = 20):
 
     cache[username]['topics'][topic]['avgSentiment'] = avgSentiment
     cache[username]['topics'][topic]['totalTweets'] = totalTweets
-
+    print(f'{username} has {avgSentiment} sentiment about {topic}')
     return (avgSentiment, totalTweets)
 

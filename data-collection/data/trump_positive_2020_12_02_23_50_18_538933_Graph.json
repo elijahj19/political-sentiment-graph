@@ -1,0 +1,26 @@
+{
+    "tiborec": {
+        "topicAvgSentiment": 0.8,
+        "topicTotalTweets": 5,
+        "followers": ["tigrouchou", "spideryoyo"],
+        "following": ["greuh", "tigrouchou", "spideryoyo"]
+    },
+    "greuh": {
+        "topicAvgSentiment": 0.4,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["tiborec"]
+    },
+    "tigrouchou": {
+        "topicAvgSentiment": 1.0,
+        "topicTotalTweets": 7,
+        "following": ["tiborec"],
+        "followers": ["tiborec"]
+    },
+    "spideryoyo": {
+        "topicAvgSentiment": 0.75,
+        "topicTotalTweets": 20,
+        "following": ["tiborec"],
+        "followers": ["tiborec"]
+    }
+}
