@@ -1,4 +1,14 @@
 
+## getProbOfConnection
+## definitions from https://www.youtube.com/watch?v=rlIJ-g-o8mk
+## p = connectance = probability 2 nodes are connected (0<=p<=1)
+def getProbOfConnection(graph):
+    n = len(graph)
+    m = 0
+    for node in graph:
+        m += node['following']
+    p = m / (n*(n-1) / 2) # all edges in graph over all possible edges
+    return p
 
 def calculateHomophily(graph):
     pass
