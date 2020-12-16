@@ -1,0 +1,26 @@
+{
+    "warjaklaroder": {
+        "topicAvgSentiment": 0.45,
+        "topicTotalTweets": 20,
+        "followers": ["die_kleine_rolf", "bsoellner", "bobdiz2"],
+        "following": []
+    },
+    "die_kleine_rolf": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 2,
+        "following": ["warjaklaroder"],
+        "followers": []
+    },
+    "bsoellner": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 20,
+        "following": ["warjaklaroder"],
+        "followers": []
+    },
+    "bobdiz2": {
+        "topicAvgSentiment": -0.05,
+        "topicTotalTweets": 20,
+        "following": ["warjaklaroder"],
+        "followers": []
+    }
+}

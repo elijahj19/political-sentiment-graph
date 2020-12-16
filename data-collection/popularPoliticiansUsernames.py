@@ -1,0 +1,2 @@
+conservative = ['realDonaldTrump', 'SarahPalinUSA', 'AppSame', 'michellemalkin',]
+liberal = ['BarackObama', 'JoeBiden', 'KamalaHarris', 'AOC', 'BernieSanders', 'TheDemocrats', 'SpeakerPelosi', 'SenSchumer', 'SenWarren', 'HillaryClinton', 'MichelleObama']

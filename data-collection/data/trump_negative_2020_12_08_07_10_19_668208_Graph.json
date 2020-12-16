@@ -1,0 +1,110 @@
+{
+    "seamuspotstir": {
+        "topicAvgSentiment": -1,
+        "topicTotalTweets": 20,
+        "followers": [],
+        "following": ["scottatbc", "sloooow_roasted", "ragstowriting", "jgcgsd", "hunt_karens", "coldandfromcali", "woodyspigroasts", "bignamehere", "mj_184", "long_first", "justice4carmel", "scorobe1", "biggestern", "mombestjobever", "therealkilcore", "jetskisghost", "eriksonsghost"]
+    },
+    "scottatbc": {
+        "topicAvgSentiment": -0.25,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "sloooow_roasted": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "ragstowriting": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 3,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "jgcgsd": {
+        "topicAvgSentiment": -0.65,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "hunt_karens": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "coldandfromcali": {
+        "topicAvgSentiment": -0.45,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "woodyspigroasts": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "bignamehere": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "mj_184": {
+        "topicAvgSentiment": -0.55,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "long_first": {
+        "topicAvgSentiment": -0.26666666666666666,
+        "topicTotalTweets": 15,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "justice4carmel": {
+        "topicAvgSentiment": -0.7647058823529411,
+        "topicTotalTweets": 17,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "scorobe1": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "biggestern": {
+        "topicAvgSentiment": -0.55,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "mombestjobever": {
+        "topicAvgSentiment": -0.7,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "therealkilcore": {
+        "topicAvgSentiment": -0.5,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "jetskisghost": {
+        "topicAvgSentiment": -0.6666666666666666,
+        "topicTotalTweets": 9,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    },
+    "eriksonsghost": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["seamuspotstir"]
+    }
+}

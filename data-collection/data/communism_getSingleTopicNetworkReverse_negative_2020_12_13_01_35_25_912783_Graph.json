@@ -1,0 +1,38 @@
+{
+    "ajvar_and_chill": {
+        "topicAvgSentiment": -0.85,
+        "topicTotalTweets": 20,
+        "followers": ["thegreatnoldini", "a9ma10", "comedicarsonist", "losercatlady666", "awesome9000"],
+        "following": ["thegreatnoldini"]
+    },
+    "thegreatnoldini": {
+        "topicAvgSentiment": -0.875,
+        "topicTotalTweets": 16,
+        "following": ["ajvar_and_chill"],
+        "followers": ["ajvar_and_chill"]
+    },
+    "a9ma10": {
+        "topicAvgSentiment": -0.95,
+        "topicTotalTweets": 20,
+        "following": ["ajvar_and_chill"],
+        "followers": []
+    },
+    "comedicarsonist": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 2,
+        "following": ["ajvar_and_chill"],
+        "followers": []
+    },
+    "losercatlady666": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 3,
+        "following": ["ajvar_and_chill"],
+        "followers": []
+    },
+    "awesome9000": {
+        "topicAvgSentiment": -0.8,
+        "topicTotalTweets": 5,
+        "following": ["ajvar_and_chill"],
+        "followers": []
+    }
+}

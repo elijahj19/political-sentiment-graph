@@ -1,0 +1,98 @@
+{
+    "ginnyclausen": {
+        "topicAvgSentiment": -1,
+        "topicTotalTweets": 20,
+        "followers": ["nurankaraca80", "pstone3504", "cocoajohnston", "dustoff_54", "avesi", "nothingbutrabb1", "laurenbakerfit", "torpeto", "sudburyfrob", "ferretkit", "cburns186", "hemi66coronet", "kathyharris44", "dustinmcd123", "jfdiv41"],
+        "following": []
+    },
+    "nurankaraca80": {
+        "topicAvgSentiment": -0.85,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "pstone3504": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 4,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "cocoajohnston": {
+        "topicAvgSentiment": -0.65,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "dustoff_54": {
+        "topicAvgSentiment": -0.5,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "avesi": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 4,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "nothingbutrabb1": {
+        "topicAvgSentiment": -0.55,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "laurenbakerfit": {
+        "topicAvgSentiment": -0.42857142857142855,
+        "topicTotalTweets": 7,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "torpeto": {
+        "topicAvgSentiment": -0.3,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "sudburyfrob": {
+        "topicAvgSentiment": -0.631578947368421,
+        "topicTotalTweets": 19,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "ferretkit": {
+        "topicAvgSentiment": -0.6,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "cburns186": {
+        "topicAvgSentiment": -0.55,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "hemi66coronet": {
+        "topicAvgSentiment": -0.7,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "kathyharris44": {
+        "topicAvgSentiment": -0.4,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "dustinmcd123": {
+        "topicAvgSentiment": -0.65,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    },
+    "jfdiv41": {
+        "topicAvgSentiment": -0.8,
+        "topicTotalTweets": 20,
+        "following": ["ginnyclausen"],
+        "followers": []
+    }
+}

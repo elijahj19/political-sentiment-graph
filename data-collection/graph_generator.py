@@ -13,10 +13,10 @@ import twint # import Twitter scraper
 from bluebird import BlueBird # for getting followers and following, since Twint has a bug
 
 # global variables
-MAX_FOLLOWERS = 450 # maximum amount of followers a user can have to qualify
-MIN_FOLLOWERS = 10 # minimum amount of followers a user can have to qualify
+MAX_FOLLOWERS = 550 # maximum amount of followers a user can have to qualify
+MIN_FOLLOWERS = 5 # minimum amount of followers a user can have to qualify
 MAX_FOLLOWING = 1000 # maximum amount of users a user can follow to qualify
-MIN_FOLLOWING = 10 # minimum amount of of users a user can follower to qualify
+MIN_FOLLOWING = 5 # minimum amount of of users a user can follower to qualify
 
 # isUserValid
 # username: the Twitter username of user
@@ -71,10 +71,10 @@ def getSingleTopicNetwork(rootUsername, rootUserAvgSentiment, rootUserTotalTweet
             username, curFrontier = queue.pop(0)
 
             # if the user has been already added as a node to network, must be valid
-            # at this point the user's followers have been edited but not the following
+            # at this point the user's following have been edited but not the following
             if username in network:
                 print("user already present in network")
-                tempFollowing = tw.getFollowing(username) # get all followers
+                tempFollowing = tw.getFollowing(username) # get all following
                 
                 if curFrontier >= frontiers:
                     continue
@@ -118,7 +118,91 @@ def getSingleTopicNetwork(rootUsername, rootUserAvgSentiment, rootUserTotalTweet
     except:
         print('Probably a rate limit error, saving graph as is')
 
+    return network
+
+def getSingleTopicNetworkReverse(rootUsername, rootUserAvgSentiment, rootUserTotalTweets, topic, frontiers):
+    """
+    network
+    maps username to data
+    {
+        "username1": { # username 1
+            topicAvgSentiment: 1,
+            topicTotalTweets: 10
+            followers: [2, 3, 10],
+            followingIDs: [2, 3, 10]
+        },
+        "username2": {
+            topicAvgSentiment: 1,
+            topicTotalTweets: 10
+            followerIDs: [2, 3, 10],
+            followingIDs: [2, 3, 10]
+        }
+    }
+    """
+    network = {
+        rootUsername: {
+            "topicAvgSentiment": rootUserAvgSentiment,
+            "topicTotalTweets": rootUserTotalTweets,
+            "followers": [],
+            "following": []
+        }
+    }
+    nonValidUsernames = set() # set of usernames already explored that have been determined to not be valid, saves calls to Twitter
+
+    # perform a modified BFS from rootUsername to create network
+    queue = [(rootUsername, 0)] # a queue for each
+    try:
+        while len(queue) > 0:
+            # pop the user from the queue
+            username, curFrontier = queue.pop(0)
+
+            # if the user has been already added as a node to network, must be valid
+            # at this point the user's followers have been edited but not the following
+            if username in network:
+                print("user already present in network")
+                tempFollowers = tw.getFollowers(username) # get all followers
+                
+                if curFrontier >= frontiers:
+                    continue
+
+                for follower in tempFollowers:
+                    # if the followed user is already in the network, just append the usernames to respective lists
+                    if follower in network:
+                        network[follower]["following"].append(username)
+                        network[username]["followers"].append(follower)
+                        continue                    
+                    # if followed user is outside the frontiers of the graph or the followed user is not valid, skip
+                    elif curFrontier >= frontiers or follower in nonValidUsernames:
+                        print(f'skipping followingUser {follower}')
+                        continue
+                    elif not isUserValid(follower):
+                        print(f'Skipping following user {follower} because not valid')
+                        nonValidUsernames.add(follower)
+                        continue
+                    print(f'analyzing sentiment of following user {follower}')
+                    # otherwise must calculate the stats for the followed user and add them to the network
+                    avgSentiment, totalTweets = tw.getUserSentiment(follower, topic)
+                    if (avgSentiment != 0) and totalTweets >= 2:
+                        network[follower] = {
+                            "topicAvgSentiment": avgSentiment,
+                            "topicTotalTweets": totalTweets,
+                            "following": [username],
+                            "followers": []
+                        }
+                        network[username]["followers"].append(follower)
+                        queue.append((follower, curFrontier + 1)) # add the new user to the queue with the frontier
+                        print(f'{follower} has been added')
+                    else:
+                        print(f'{follower} did not have discernible sentiment')
+                        nonValidUsernames.add(follower)        
+            # if the user has not been seen before and is NOT valid
+            else:
+                print(f"user {username} not valid")
+                nonValidUsernames.add(username)
+                continue
         
+    except:
+        print('Probably a rate limit error, saving graph as is')
 
     return network
 
@@ -140,6 +224,7 @@ def getRootNodeUser(topic, desiredSentiment, minTweets = 2):
     c.Hide_output = True # don't print output to console here (maybe do it elsewhere)
     c.Store_object = True # store as object
     c.Store_object_tweets_list = tweetList
+    c.Lang = 'en' # only english tweets
     twint.run.Search(c)
 
     initialUser = None
@@ -162,7 +247,7 @@ def getRootNodeUser(topic, desiredSentiment, minTweets = 2):
                 }
                 break
     except:
-        print('Probably a rate limit error, saving graph as is')
+        print('Probably a rate limit error, initial user could not be found?')
     return initialUser
 
 # createSingleTopicNetwork
@@ -172,20 +257,26 @@ def getRootNodeUser(topic, desiredSentiment, minTweets = 2):
 # frontiers (integer): how many BFS frontiers starting from the root node should there be in the returned network
 # RETURN: adjacency list in the form of Python dictionary 
 #   {"username" : {"avgSentiment": -1, "totalTweets": 10, "following": ["username"], "followers": ["username"]}} 
-def createSingleTopicNetwork(topic, rootUserSentiment, frontiers = 1, minTweets = 2):
+def createSingleTopicNetwork(topic, rootUserSentiment, graphType, frontiers = 1, minTweets = 2):
     tw.loadCache()
     print(f"Creating graph about {topic} with {frontiers} frontiers")
     rootUser = getRootNodeUser(topic, rootUserSentiment, minTweets)
     print(f'received root user {rootUser}')
     # if unable to get a root user
     if rootUser == None:
+        print(f"Could not find suitable root user for topic {topic} with {rootUserSentiment} sentiment")
         raise Exception(f"Could not find suitable root user for topic {topic} with {rootUserSentiment} sentiment")
     print(f"root user node is {rootUser}")
     print(tw.getFollowers(rootUser["username"]))
     print(tw.getFollowing(rootUser["username"]))
     #getUserMap(rootUser["username"], topic, frontiers)
-
-    network = getSingleTopicNetwork(rootUser["username"], rootUser["avgSentiment"], rootUser["totalTweets"], topic, frontiers)
+    network = {}
+    if graphType == 'getSingleTopicNetwork':
+        network = getSingleTopicNetwork(rootUser["username"], rootUser["avgSentiment"], rootUser["totalTweets"], topic, frontiers)
+    elif graphType == 'getSingleTopicNetworkReverse':
+        network = getSingleTopicNetworkReverse(rootUser["username"], rootUser["avgSentiment"], rootUser["totalTweets"], topic, frontiers)
+    else:
+        raise Exception(f'graphType {graphType} does not exist')
     tw.saveCache()
     return network
 

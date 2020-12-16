@@ -1,0 +1,14 @@
+{
+    "heavensangel128": {
+        "topicAvgSentiment": -0.85,
+        "topicTotalTweets": 20,
+        "followers": [],
+        "following": ["sammysawshank"]
+    },
+    "sammysawshank": {
+        "topicAvgSentiment": -0.65,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["heavensangel128"]
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "smootjim": {
+        "topicAvgSentiment": -0.4,
+        "topicTotalTweets": 20,
+        "followers": ["mxhubb", "winyan143"],
+        "following": []
+    },
+    "mxhubb": {
+        "topicAvgSentiment": -0.6,
+        "topicTotalTweets": 20,
+        "following": ["smootjim"],
+        "followers": []
+    },
+    "winyan143": {
+        "topicAvgSentiment": -0.1,
+        "topicTotalTweets": 20,
+        "following": ["smootjim"],
+        "followers": []
+    }
+}

@@ -1,0 +1,122 @@
+{
+    "saintaleczandah": {
+        "topicAvgSentiment": 0.6111111111111112,
+        "topicTotalTweets": 18,
+        "followers": ["copenhagenman21", "nullvoi7d", "speghi"],
+        "following": ["nullvoi7d"]
+    },
+    "copenhagenman21": {
+        "topicAvgSentiment": -0.8571428571428571,
+        "topicTotalTweets": 7,
+        "following": ["saintaleczandah", "nullvoi7d"],
+        "followers": ["lordofpee", "jonassterner_", "nullvoi7d", "zelbohammer", "hshrequiem", "wormhours", "cuckdudes", "siberiaism"]
+    },
+    "nullvoi7d": {
+        "topicAvgSentiment": -0.5,
+        "topicTotalTweets": 2,
+        "following": ["saintaleczandah", "copenhagenman21"],
+        "followers": ["saintaleczandah", "nyanyacatears", "ketaminelulu", "memorylossidiot", "copenhagenman21", "sincerelydxnnii", "mister_nobodya", "xlivdave", "sjokaveno", "speghi", "hke2083", "onlineheaven99"]
+    },
+    "speghi": {
+        "topicAvgSentiment": -0.35,
+        "topicTotalTweets": 20,
+        "following": ["saintaleczandah", "nullvoi7d"],
+        "followers": []
+    },
+    "lordofpee": {
+        "topicAvgSentiment": -0.3333333333333333,
+        "topicTotalTweets": 6,
+        "following": ["copenhagenman21"],
+        "followers": []
+    },
+    "jonassterner_": {
+        "topicAvgSentiment": -0.7,
+        "topicTotalTweets": 10,
+        "following": ["copenhagenman21"],
+        "followers": []
+    },
+    "zelbohammer": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 4,
+        "following": ["copenhagenman21"],
+        "followers": []
+    },
+    "hshrequiem": {
+        "topicAvgSentiment": -0.5,
+        "topicTotalTweets": 2,
+        "following": ["copenhagenman21"],
+        "followers": []
+    },
+    "wormhours": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 16,
+        "following": ["copenhagenman21"],
+        "followers": []
+    },
+    "cuckdudes": {
+        "topicAvgSentiment": -0.45,
+        "topicTotalTweets": 20,
+        "following": ["copenhagenman21"],
+        "followers": []
+    },
+    "siberiaism": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 2,
+        "following": ["copenhagenman21"],
+        "followers": []
+    },
+    "nyanyacatears": {
+        "topicAvgSentiment": -0.6666666666666666,
+        "topicTotalTweets": 15,
+        "following": ["nullvoi7d"],
+        "followers": []
+    },
+    "ketaminelulu": {
+        "topicAvgSentiment": -0.5,
+        "topicTotalTweets": 2,
+        "following": ["nullvoi7d"],
+        "followers": []
+    },
+    "memorylossidiot": {
+        "topicAvgSentiment": -0.5,
+        "topicTotalTweets": 4,
+        "following": ["nullvoi7d"],
+        "followers": []
+    },
+    "sincerelydxnnii": {
+        "topicAvgSentiment": -0.6,
+        "topicTotalTweets": 5,
+        "following": ["nullvoi7d"],
+        "followers": []
+    },
+    "mister_nobodya": {
+        "topicAvgSentiment": -0.7,
+        "topicTotalTweets": 10,
+        "following": ["nullvoi7d"],
+        "followers": []
+    },
+    "xlivdave": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 2,
+        "following": ["nullvoi7d"],
+        "followers": []
+    },
+    "sjokaveno": {
+        "topicAvgSentiment": -0.5714285714285714,
+        "topicTotalTweets": 7,
+        "following": ["nullvoi7d"],
+        "followers": []
+    },
+    "hke2083": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 5,
+        "following": ["nullvoi7d"],
+        "followers": []
+    },
+    "onlineheaven99": {
+        "topicAvgSentiment": -0.5,
+        "topicTotalTweets": 4,
+        "following": ["nullvoi7d"],
+        "followers": []
+    }
+}

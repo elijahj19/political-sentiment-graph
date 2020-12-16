@@ -1,0 +1,38 @@
+{
+    "softndgentle": {
+        "topicAvgSentiment": -0.8333333333333334,
+        "topicTotalTweets": 6,
+        "followers": [],
+        "following": ["trashgobl1n", "banessahayes", "lillyafull", "khryslovessushi", "zaydenregula"]
+    },
+    "trashgobl1n": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 4,
+        "following": [],
+        "followers": ["softndgentle"]
+    },
+    "banessahayes": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 2,
+        "following": [],
+        "followers": ["softndgentle"]
+    },
+    "lillyafull": {
+        "topicAvgSentiment": -0.8461538461538461,
+        "topicTotalTweets": 13,
+        "following": [],
+        "followers": ["softndgentle"]
+    },
+    "khryslovessushi": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 2,
+        "following": [],
+        "followers": ["softndgentle"]
+    },
+    "zaydenregula": {
+        "topicAvgSentiment": -0.95,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["softndgentle"]
+    }
+}

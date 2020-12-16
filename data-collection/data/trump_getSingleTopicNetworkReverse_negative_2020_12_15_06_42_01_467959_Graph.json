@@ -1,0 +1,1 @@
+{"ibandit03": {"topicAvgSentiment": -0.7, "topicTotalTweets": 20, "followers": ["smffaisal"], "following": []}, "smffaisal": {"topicAvgSentiment": -1.0, "topicTotalTweets": 3, "following": ["ibandit03"], "followers": ["patreardon68"]}, "patreardon68": {"topicAvgSentiment": -0.7, "topicTotalTweets": 20, "following": ["smffaisal"], "followers": []}}

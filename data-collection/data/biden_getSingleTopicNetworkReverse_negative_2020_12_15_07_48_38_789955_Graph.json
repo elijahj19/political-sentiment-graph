@@ -1,0 +1,50 @@
+{
+    "jerri_cho2": {
+        "topicAvgSentiment": -0.25,
+        "topicTotalTweets": 20,
+        "followers": ["jamalaladil", "lu042956", "milo_wonder", "bklynike"],
+        "following": []
+    },
+    "jamalaladil": {
+        "topicAvgSentiment": -0.25,
+        "topicTotalTweets": 20,
+        "following": ["jerri_cho2"],
+        "followers": ["simba_marie", "lu042956", "kenny_clemons"]
+    },
+    "lu042956": {
+        "topicAvgSentiment": -0.1,
+        "topicTotalTweets": 20,
+        "following": ["jerri_cho2", "jamalaladil"],
+        "followers": ["ppomps"]
+    },
+    "milo_wonder": {
+        "topicAvgSentiment": -0.5294117647058824,
+        "topicTotalTweets": 17,
+        "following": ["jerri_cho2"],
+        "followers": []
+    },
+    "bklynike": {
+        "topicAvgSentiment": -0.45,
+        "topicTotalTweets": 20,
+        "following": ["jerri_cho2"],
+        "followers": []
+    },
+    "simba_marie": {
+        "topicAvgSentiment": 0.3,
+        "topicTotalTweets": 20,
+        "following": ["jamalaladil"],
+        "followers": []
+    },
+    "kenny_clemons": {
+        "topicAvgSentiment": -0.3,
+        "topicTotalTweets": 20,
+        "following": ["jamalaladil"],
+        "followers": []
+    },
+    "ppomps": {
+        "topicAvgSentiment": -0.3333333333333333,
+        "topicTotalTweets": 3,
+        "following": ["lu042956"],
+        "followers": []
+    }
+}

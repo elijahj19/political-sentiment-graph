@@ -1,0 +1,98 @@
+{
+    "ablincoln23": {
+        "topicAvgSentiment": -0.5,
+        "topicTotalTweets": 20,
+        "followers": ["eddie_slate", "bowlcutcanary3", "joe01880", "peek4x4"],
+        "following": ["bowlcutcanary3"]
+    },
+    "eddie_slate": {
+        "topicAvgSentiment": -0.2,
+        "topicTotalTweets": 20,
+        "following": ["ablincoln23"],
+        "followers": []
+    },
+    "bowlcutcanary3": {
+        "topicAvgSentiment": 0.05,
+        "topicTotalTweets": 20,
+        "following": ["ablincoln23"],
+        "followers": ["dwwho10", "smichie9", "rece3", "pardeeball", "kindnessfan66", "stayhot10", "ablincoln23", "joshyq042"]
+    },
+    "joe01880": {
+        "topicAvgSentiment": -0.5,
+        "topicTotalTweets": 20,
+        "following": ["ablincoln23"],
+        "followers": ["vickimitchell3", "maskwhisperer", "catgate", "tonymartin_33"]
+    },
+    "peek4x4": {
+        "topicAvgSentiment": 0.42857142857142855,
+        "topicTotalTweets": 7,
+        "following": ["ablincoln23"],
+        "followers": []
+    },
+    "dwwho10": {
+        "topicAvgSentiment": -0.3,
+        "topicTotalTweets": 20,
+        "following": ["bowlcutcanary3"],
+        "followers": []
+    },
+    "smichie9": {
+        "topicAvgSentiment": -0.1,
+        "topicTotalTweets": 20,
+        "following": ["bowlcutcanary3"],
+        "followers": []
+    },
+    "rece3": {
+        "topicAvgSentiment": 0.1111111111111111,
+        "topicTotalTweets": 9,
+        "following": ["bowlcutcanary3"],
+        "followers": []
+    },
+    "pardeeball": {
+        "topicAvgSentiment": -0.42857142857142855,
+        "topicTotalTweets": 7,
+        "following": ["bowlcutcanary3"],
+        "followers": []
+    },
+    "kindnessfan66": {
+        "topicAvgSentiment": -0.35,
+        "topicTotalTweets": 20,
+        "following": ["bowlcutcanary3"],
+        "followers": []
+    },
+    "stayhot10": {
+        "topicAvgSentiment": -0.7777777777777778,
+        "topicTotalTweets": 18,
+        "following": ["bowlcutcanary3"],
+        "followers": []
+    },
+    "joshyq042": {
+        "topicAvgSentiment": 1.0,
+        "topicTotalTweets": 3,
+        "following": ["bowlcutcanary3"],
+        "followers": []
+    },
+    "vickimitchell3": {
+        "topicAvgSentiment": 0.1,
+        "topicTotalTweets": 20,
+        "following": ["joe01880"],
+        "followers": []
+    },
+    "maskwhisperer": {
+        "topicAvgSentiment": 0.05,
+        "topicTotalTweets": 20,
+        "following": ["joe01880"],
+        "followers": []
+    },
+    "catgate": {
+        "topicAvgSentiment": 0.3333333333333333,
+        "topicTotalTweets": 3,
+        "following": ["joe01880"],
+        "followers": []
+    },
+    "tonymartin_33": {
+        "topicAvgSentiment": 0.1,
+        "topicTotalTweets": 20,
+        "following": ["joe01880"],
+        "followers": []
+    }
+}

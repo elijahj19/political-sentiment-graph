@@ -8,8 +8,9 @@ import json
 
 ABSOLUTE_CACHE_FOLDER_PATH = "D:/School/CollegeJunior/Fall2020/LING495/Project/repo/political-sentiment-graph/data-collection/twitter_cache"
 
-cache = {} # cache of usernames to data
+cache = {} # cache of usernames to data, essentially a huge graph meant to cache users so we don't have to keep pinging Twitter for them
 
+# loads the saved cache from the filesystem
 def loadCache():
     print('Finding saved cache')
     try:
@@ -19,6 +20,7 @@ def loadCache():
     except:
         print('No saved cache found or saved cache corrupted')
 
+# saves the cache to the filesystem
 def saveCache():
     print('Saving cache')
     try:
@@ -112,6 +114,7 @@ def getUserTweetsAboutTopic(username, topic, limit=100):
     c.Store_object = True # store as object
     c.Store_object_tweets_list = tweetList
     c.Hide_output = True
+    c.Lang = 'en' # only english tweets
     twint.run.Search(c)
 
     # filter tweets to make sure query was correct
@@ -169,6 +172,7 @@ def getUserSentiment(username, topic, maxTweets = 20):
     totalTweets = 0 # total tweets analyzed for sentiment (excludes tweets not analyzed for sentiment)
     for tweet in tweetList:
         calcSentiment = msa.getSentiment(tweet, topic)
+        print(tweet, f" || Sentiment: {calcSentiment}")
         avgSentiment += calcSentiment
         totalTweets += 1
 

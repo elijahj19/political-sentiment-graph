@@ -1,0 +1,68 @@
+{
+    "oliver_i_": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 9,
+        "followers": ["takis_cgn_skg", "lastoiletpaper", "mirjana_2011"],
+        "following": []
+    },
+    "takis_cgn_skg": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 17,
+        "following": ["oliver_i_"],
+        "followers": ["susanne_hahn", "5m0k13", "fraustahlchen", "ali_senkblei", "heine_cuthen", "roza_eve", "mbssanio"]
+    },
+    "lastoiletpaper": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 2,
+        "following": ["oliver_i_"],
+        "followers": []
+    },
+    "mirjana_2011": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 7,
+        "following": ["oliver_i_"],
+        "followers": []
+    },
+    "susanne_hahn": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 4,
+        "following": ["takis_cgn_skg"],
+        "followers": []
+    },
+    "5m0k13": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 8,
+        "following": ["takis_cgn_skg"],
+        "followers": []
+    },
+    "fraustahlchen": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 2,
+        "following": ["takis_cgn_skg"],
+        "followers": []
+    },
+    "ali_senkblei": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 12,
+        "following": ["takis_cgn_skg"],
+        "followers": []
+    },
+    "heine_cuthen": {
+        "topicAvgSentiment": -0.25,
+        "topicTotalTweets": 4,
+        "following": ["takis_cgn_skg"],
+        "followers": []
+    },
+    "roza_eve": {
+        "topicAvgSentiment": -0.8333333333333334,
+        "topicTotalTweets": 6,
+        "following": ["takis_cgn_skg"],
+        "followers": []
+    },
+    "mbssanio": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 3,
+        "following": ["takis_cgn_skg"],
+        "followers": []
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "haroldj62777849": {
+        "topicAvgSentiment": -0.95,
+        "topicTotalTweets": 20,
+        "followers": [],
+        "following": ["anuska299", "rene19981077"]
+    },
+    "anuska299": {
+        "topicAvgSentiment": -0.7,
+        "topicTotalTweets": 20,
+        "following": ["powerlessbald", "gambit_1"],
+        "followers": ["haroldj62777849"]
+    },
+    "rene19981077": {
+        "topicAvgSentiment": -1.0,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["haroldj62777849"]
+    },
+    "powerlessbald": {
+        "topicAvgSentiment": -0.75,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["anuska299"]
+    },
+    "gambit_1": {
+        "topicAvgSentiment": -0.8,
+        "topicTotalTweets": 20,
+        "following": [],
+        "followers": ["anuska299"]
+    }
+}
